@@ -26,8 +26,12 @@ public class MainPage {
     @FindBy(how = How.CLASS_NAME, using = "AppHeader_header__logo__2D0X2")
     private SelenideElement logoButton;
 
+    //локатор текста "Соберите бургер"
+    @FindBy(how = How.XPATH, using = ".//h1[@class='text text_type_main-large mb-5 mt-10'][text()='Соберите бургер']")
+    private SelenideElement assembleBurger;
+
     //локатор кнопки Конструктор
-    @FindBy(how = How.CLASS_NAME, using = "AppHeader_header__linkText__3q_va ml-2")
+    @FindBy(how = How.CLASS_NAME, using = "AppHeader_header__link__3D_hX AppHeader_header__link_active__1IkJo")
     private SelenideElement constructorButton;
 
     //локатор раздела Булки
@@ -42,10 +46,16 @@ public class MainPage {
     @FindBy(how = How.XPATH, using = ".//span[text() = 'Начинки']")
     private SelenideElement fillingsButton;
 
-    //метод клика по кнопке Личный кабинет
-    public LoginPage clickPersonalArea() {
+    //метод клика по кнопке Личный кабинет неавторизованного пользователя
+    public LoginPage clickPersonalAreaUnAuth() {
         personalAreaButton.click();
         return page(LoginPage.class);
+    }
+
+    //метод клика по кнопке Личный кабинет авторизованного пользователя
+    public ProfilePage clickPersonalAreaAuth() {
+        personalAreaButton.click();
+        return page(ProfilePage.class);
     }
 
     //метод клика по кнопке Войти в аккаунт
@@ -55,13 +65,15 @@ public class MainPage {
     }
 
     //метод клика по логотипу Stellar Burgers
-    public void clickLogo() {
+    public MainPage clickLogo() {
         logoButton.click();
+        return page(MainPage.class);
     }
 
     //метод клика по кнопке Конструктор
-    public void clickConstructor() {
+    public MainPage clickConstructor() {
         constructorButton.click();
+        return page(MainPage.class);
     }
 
     //метод клика по разделу Булки
@@ -82,5 +94,10 @@ public class MainPage {
     //метод проверки того, что отобразилась кнопка "Оформить заказ"
     public void displayCheckoutButton() {
         checkoutButton.should(exist);
+    }
+
+    //метод проверки того, что отобразился текст "Соберите бургер"
+    public void displayAssembleBurger() {
+        assembleBurger.should(exist);
     }
 }

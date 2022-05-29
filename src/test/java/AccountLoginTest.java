@@ -51,7 +51,7 @@ public class AccountLoginTest {
     @Description("authorization through the main page on the button _Personal Area_")
     public void accountLoginPersonalAreaTest(){
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
-        LoginPage loginPage = mainPage.clickPersonalArea();
+        LoginPage loginPage = mainPage.clickPersonalAreaUnAuth();
         loginPage.loginForm(account.getEmail(), account.getPassword());
         loginPage.clickInput();
         mainPage.displayCheckoutButton();
