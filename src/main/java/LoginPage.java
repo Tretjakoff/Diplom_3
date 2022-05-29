@@ -1,10 +1,9 @@
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.page;
-import static org.testng.AssertJUnit.assertTrue;
 
 public class LoginPage {
     //локатор поля ввода Email
@@ -65,7 +64,7 @@ public class LoginPage {
 
     //метод проверки того, что отобразилось слово "Вход"
     public void displayInput() {
-        assertTrue(textInput.isDisplayed());
+        textInput.should(exist);
     }
 
     /***
@@ -73,7 +72,7 @@ public class LoginPage {
      * Вводим пароль
      */
     public void loginForm(String email, String password) {
-        this.clickAndInputEmail(email)
+            this.clickAndInputEmail(email)
                 .clickAndInputPassword(password);
     }
 }

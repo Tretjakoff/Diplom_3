@@ -7,15 +7,16 @@ import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static com.codeborne.selenide.Selenide.open;
 
 public class AccountLoginTest {
 
-    Account account = new Account(Utils.randomString(10), Utils.randomString(5)+"@yandex.ru", Utils.randomString(10));
+    Account account = new Account(Utils.randomString(10), Utils.randomString(5) + "@yandex.ru", Utils.randomString(10));
     private static String bearerToken;
 
     @Before
-    public void registrationAccount(){
+    public void registrationAccount() {
         RegisterPage registerPage = open("https://stellarburgers.nomoreparties.site/register", RegisterPage.class);
         registerPage.registerForm(account.getName(), account.getEmail(), account.getPassword());
         registerPage.clickRegistration();
@@ -38,7 +39,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the main page")
     @Description("authorization through the main page on the button _Sign in_")
-    public void accountLoginMainTest(){
+    public void accountLoginMainTest() {
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         LoginPage loginPage = mainPage.clickAccountLogin();
         loginPage.loginForm(account.getEmail(), account.getPassword());
@@ -49,7 +50,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the main page")
     @Description("authorization through the main page on the button _Personal Area_")
-    public void accountLoginPersonalAreaTest(){
+    public void accountLoginPersonalAreaTest() {
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         LoginPage loginPage = mainPage.clickPersonalAreaUnAuth();
         loginPage.loginForm(account.getEmail(), account.getPassword());
@@ -60,7 +61,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the registration page")
     @Description("authorization through the registration page on the button _Input_")
-    public void accountLoginFromRegistrationPageTest(){
+    public void accountLoginFromRegistrationPageTest() {
         RegisterPage registerPage = open("https://stellarburgers.nomoreparties." +
                 "site/register", RegisterPage.class);
         LoginPage loginPage = registerPage.clickInput();
@@ -72,7 +73,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the RestorePasswordPage")
     @Description("authorization through the RestorePasswordPage on the button _Input_")
-    public void accountLoginFromRestorePasswordPageTest(){
+    public void accountLoginFromRestorePasswordPageTest() {
         RestorePasswordPage restorePasswordPage = open("https://stellarburgers." +
                 "nomoreparties.site/forgot-password", RestorePasswordPage.class);
         LoginPage loginPage = restorePasswordPage.clickInputButton();

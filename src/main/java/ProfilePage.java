@@ -11,6 +11,11 @@ public class ProfilePage {
             "medium text_color_inactive Account_link_active__2opc9'][text()='Профиль']")
     private SelenideElement profileButton;
 
+    //локатор кнопки "Выход"
+    @FindBy(how = How.XPATH, using = ".//button[@class='Account_button__14Yp3 text text_type_" +
+            "main-medium text_color_inactive'][text()='Выход']")
+    private SelenideElement exitButton;
+
     //локатор логотипа Stellar Burgers
     @FindBy(how = How.CLASS_NAME, using = "AppHeader_header__logo__2D0X2")
     private SelenideElement logoButton;
@@ -34,5 +39,11 @@ public class ProfilePage {
     public MainPage clickConstructor() {
         constructorButton.click();
         return page(MainPage.class);
+    }
+
+    //метод клика по кнопке "Выход"
+    public LoginPage clickExit() {
+        exitButton.click();
+        return page(LoginPage.class);
     }
 }

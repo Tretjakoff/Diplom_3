@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class GoToPersonalAccountTest {
+public class LogoutTest {
     Account account = new Account(Utils.randomString(10), Utils.randomString(5) + "@yandex.ru", Utils.randomString(10));
     private static String bearerToken;
 
@@ -36,22 +36,15 @@ public class GoToPersonalAccountTest {
     }
 
     @Test
-    @DisplayName("Go to personal account")
-    @Description("Going to the personal account of an authorized user")
-    public void goToPersonalAccountTest() {
+    @DisplayName("Go to constructor")
+    @Description("Go to constructor using the constructor button")
+    public void goToConstructorTest() {
         LoginPage loginPage = open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
         loginPage.loginForm(account.getEmail(), account.getPassword());
         MainPage mainPage = loginPage.clickInput();
         ProfilePage profilePage = mainPage.clickPersonalAreaAuth();
-        profilePage.displayProfileButton();
-    }
-
-    @Test
-    @DisplayName("Go to personal account without auth")
-    @Description("Going to the personal account of an unauthorized user")
-    public void goToPersonalAccountWithoutAuthTest() {
-        MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
-        LoginPage loginPage = mainPage.clickPersonalAreaUnAuth();
+        profilePage.clickExit();
         loginPage.displayInput();
     }
+
 }

@@ -16,7 +16,7 @@ public class RegistrationProcessTest {
     public void registrationProcessCorrectTest() {
         //открываем страницу регистрации
         RegisterPage registerPage = open(urlStellarBurgersRegister, RegisterPage.class);
-        registerPage.registerForm(Utils.randomString(10), Utils.randomString(5)+"@yandex.ru",
+        registerPage.registerForm(Utils.randomString(10), Utils.randomString(5) + "@yandex.ru",
                 Utils.randomString(6));
         LoginPage loginPage = registerPage.clickRegistration();
         $(By.xpath(".//div[@class='Auth_login__3hAey']/h2[text()='Вход']")).should(exist);
@@ -25,10 +25,10 @@ public class RegistrationProcessTest {
     @Test
     @DisplayName("incorrect registration")
     @Description("registration with incorrect password")
-    public void registrationProcessIncorrectTest(){
+    public void registrationProcessIncorrectTest() {
         //открываем страницу регистрации
         RegisterPage registerPage = open(urlStellarBurgersRegister, RegisterPage.class);
-        registerPage.registerForm(Utils.randomString(10), Utils.randomString(5)+"@yandex.ru",
+        registerPage.registerForm(Utils.randomString(10), Utils.randomString(5) + "@yandex.ru",
                 Utils.randomString(5));
         registerPage.clickRegistration();
         registerPage.passwordCheck();

@@ -1,11 +1,9 @@
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.page;
-import static org.testng.AssertJUnit.assertTrue;
 
 public class MainPage {
     //локатор кнопки Личный кабинет
@@ -33,6 +31,21 @@ public class MainPage {
     //локатор кнопки Конструктор
     @FindBy(how = How.CLASS_NAME, using = "AppHeader_header__link__3D_hX AppHeader_header__link_active__1IkJo")
     private SelenideElement constructorButton;
+
+    //локатор выбранного раздела конструктора с ингредиентами "Булки"
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 " +
+            "pb-4 pl-10 noselect']/span[text() = 'Булки']")
+    private SelenideElement bunsSelectButton;
+
+    //локатор выбранного раздела конструктора с ингредиентами "Булки"
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 " +
+            "pb-4 pl-10 noselect']/span[text() = 'Соусы']")
+    private SelenideElement saucesSelectButton;
+
+    //локатор выбранного раздела конструктора с ингредиентами "Булки"
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 " +
+            "pb-4 pl-10 noselect']/span[text() = 'Начинки']")
+    private SelenideElement fillingsSelectButton;
 
     //локатор раздела Булки
     @FindBy(how = How.XPATH, using = ".//span[text() = 'Булки']")
@@ -77,18 +90,27 @@ public class MainPage {
     }
 
     //метод клика по разделу Булки
-    public void clickBuns() {
-        bunsButton.click();
+    public MainPage clickBuns() {
+        if (!bunsSelectButton.isDisplayed()) {
+            bunsButton.click();
+        }
+        return page(MainPage.class);
     }
 
     //метод клика по разделу Соусы
-    public void clickSauces() {
-        saucesButton.click();
+    public MainPage clickSauces() {
+        if (!saucesSelectButton.isDisplayed()) {
+            saucesButton.click();
+        }
+        return page(MainPage.class);
     }
 
     //метод клика по разделу Начинки
-    public void clickFillings() {
-        fillingsButton.click();
+    public MainPage clickFillings() {
+        if (!fillingsSelectButton.isDisplayed()) {
+            fillingsButton.click();
+        }
+        return page(MainPage.class);
     }
 
     //метод проверки того, что отобразилась кнопка "Оформить заказ"
@@ -99,5 +121,20 @@ public class MainPage {
     //метод проверки того, что отобразился текст "Соберите бургер"
     public void displayAssembleBurger() {
         assembleBurger.should(exist);
+    }
+
+    //метод проверки того, что выбран раздел "Булки" на дисплее
+    public boolean displayBunsText() {
+        return bunsSelectButton.isDisplayed();
+    }
+
+    //метод проверки того, что выбран раздел "Соусы" на дисплее
+    public boolean displaySaucesText() {
+        return saucesSelectButton.isDisplayed();
+    }
+
+    //метод проверки того, что выбран раздел "Начинки" на дисплее
+    public boolean displayFillingsText() {
+        return fillingsSelectButton.isDisplayed();
     }
 }
