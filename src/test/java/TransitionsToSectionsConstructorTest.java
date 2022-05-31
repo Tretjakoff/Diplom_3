@@ -2,12 +2,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.Account;
-import model.Login;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertTrue;
 
@@ -18,24 +16,19 @@ public class TransitionsToSectionsConstructorTest {
 
     @Before
     public void registrationAccount() {
-        RegisterPage registerPage = open("https://stellarburgers.nomoreparties.site/register",
-                RegisterPage.class);
-        registerPage.registerForm(account.getName(), account.getEmail(), account.getPassword());
-        registerPage.clickRegistration();
-        Response response = new Requests().loginUser(new Login(account.getEmail(), account.getPassword()));
-        response.then().assertThat()
-                .statusCode(200);
-        if (response.statusCode() == 200) {
-            bearerToken = response.jsonPath().getString("accessToken").replace("Bearer ", "");
-        }
+        //System.setProperty("webdriver.chrome.driver","src/main/resources/yandexdriver.exe");
+        AccountCreator accountCreator = new AccountCreator();
+        bearerToken = accountCreator.returnBearerToken(account.getName(), account.getEmail(), account.getPassword());
+        //closeWindow();
     }
 
     @After
-    public void cleanUp() {
+    public void cleanUp() throws InterruptedException {
         Response response = new Requests().deleteUser(bearerToken);
         response.then().assertThat()
                 .statusCode(202)
                 .body("message", Matchers.is("User successfully removed"));
+        Thread.sleep(1000);
     }
 
     @Test

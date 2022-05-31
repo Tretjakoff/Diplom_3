@@ -1,14 +1,39 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.Response;
+import model.Account;
+import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationProcessTest {
     private final String urlStellarBurgersRegister = "https://stellarburgers.nomoreparties.site/register";
+    Account correct = new Account(Utils.randomString(10), Utils.randomString(5) + "@yandex.ru",
+            Utils.randomString(6));
+    private static String bearerToken;
+
+    @Before
+    public void registrationAccount() {
+        //System.setProperty("webdriver.chrome.driver","src/main/resources/yandexdriver.exe");
+        AccountCreator accountCreator = new AccountCreator();
+        bearerToken = accountCreator.returnBearerToken(correct.getName(), correct.getEmail(), correct.getPassword());
+        //closeWindow();
+    }
+
+    @After
+    public void cleanUp() throws InterruptedException {
+        Response response = new Requests().deleteUser(bearerToken);
+        response.then().assertThat()
+                .statusCode(202)
+                .body("message", Matchers.is("User successfully removed"));
+        Thread.sleep(2000);
+        //closeWindow();
+    }
 
     @Test
     @DisplayName("correct registration")

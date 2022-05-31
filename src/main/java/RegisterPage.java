@@ -52,6 +52,7 @@ public class RegisterPage {
     //метод клика по полю ввода пароля и ввод
     public RegisterPage clickAndInputPassword(String password) {
         passwordField.click();
+        passwordField.click();
         passwordField.setValue(password);
         return page(RegisterPage.class);
     }
