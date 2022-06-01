@@ -1,9 +1,9 @@
 import com.codeborne.selenide.SelenideElement;
+import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Selenide.page;
-import static org.testng.AssertJUnit.assertTrue;
 
 public class RegisterPage {
 
@@ -59,7 +59,7 @@ public class RegisterPage {
 
     //метод проверки того, что появилась ошибка "Некорректный пароль"
     public void passwordCheck() {
-        assertTrue(incorrectPassword.isDisplayed());
+        Assert.assertTrue(incorrectPassword.isDisplayed());
     }
 
     //метод клика по кнопке Зарегистрироваться

@@ -17,7 +17,7 @@ public class AccountLoginTest {
     private static String bearerToken;
 
     @Before
-    public void registrationAccount() {
+    public void registrationAccount() throws InterruptedException {
         //System.setProperty("webdriver.chrome.driver","src/main/resources/yandexdriver.exe");
         AccountCreator accountCreator = new AccountCreator();
         bearerToken = accountCreator.returnBearerToken(account.getName(), account.getEmail(), account.getPassword());
@@ -30,13 +30,13 @@ public class AccountLoginTest {
         response.then().assertThat()
                 .statusCode(202)
                 .body("message", Matchers.is("User successfully removed"));
-        Thread.sleep(5000);
+        Thread.sleep(10000);
     }
 
     @Test
     @DisplayName("authorization through the main page")
     @Description("authorization through the main page on the button _Sign in_")
-    public void accountLoginMainTest() throws InterruptedException {
+    public void accountLoginMainTest() {
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         LoginPage loginPage = mainPage.clickAccountLogin();
         loginPage.loginForm(account.getEmail(), account.getPassword());
@@ -47,7 +47,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the main page")
     @Description("authorization through the main page on the button _Personal Area_")
-    public void accountLoginPersonalAreaTest() throws InterruptedException {
+    public void accountLoginPersonalAreaTest() {
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         LoginPage loginPage = mainPage.clickPersonalAreaUnAuth();
         loginPage.loginForm(account.getEmail(), account.getPassword());

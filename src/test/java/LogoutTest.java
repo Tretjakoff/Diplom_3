@@ -15,7 +15,7 @@ public class LogoutTest {
     private static String bearerToken;
 
     @Before
-    public void registrationAccount() {
+    public void registrationAccount() throws InterruptedException {
         //System.setProperty("webdriver.chrome.driver","src/main/resources/yandexdriver.exe");
         AccountCreator accountCreator = new AccountCreator();
         bearerToken = accountCreator.returnBearerToken(account.getName(), account.getEmail(), account.getPassword());

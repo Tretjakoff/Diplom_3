@@ -18,7 +18,7 @@ public class RegistrationProcessTest {
     private static String bearerToken;
 
     @Before
-    public void registrationAccount() {
+    public void registrationAccount() throws InterruptedException {
         //System.setProperty("webdriver.chrome.driver","src/main/resources/yandexdriver.exe");
         AccountCreator accountCreator = new AccountCreator();
         bearerToken = accountCreator.returnBearerToken(correct.getName(), correct.getEmail(), correct.getPassword());
@@ -31,7 +31,7 @@ public class RegistrationProcessTest {
         response.then().assertThat()
                 .statusCode(202)
                 .body("message", Matchers.is("User successfully removed"));
-        Thread.sleep(2000);
+        Thread.sleep(10000);
         //closeWindow();
     }
 
