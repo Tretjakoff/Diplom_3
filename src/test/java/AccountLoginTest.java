@@ -36,7 +36,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the main page")
     @Description("authorization through the main page on the button _Sign in_")
-    public void accountLoginMainTest() throws InterruptedException {
+    public void accountLoginMainTest() {
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         LoginPage loginPage = mainPage.clickAccountLogin();
         loginPage.loginForm(account.getEmail(), account.getPassword());
@@ -47,7 +47,7 @@ public class AccountLoginTest {
     @Test
     @DisplayName("authorization through the main page")
     @Description("authorization through the main page on the button _Personal Area_")
-    public void accountLoginPersonalAreaTest() throws InterruptedException {
+    public void accountLoginPersonalAreaTest() {
         MainPage mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         LoginPage loginPage = mainPage.clickPersonalAreaUnAuth();
         loginPage.loginForm(account.getEmail(), account.getPassword());
