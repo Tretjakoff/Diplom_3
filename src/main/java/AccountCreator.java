@@ -11,7 +11,7 @@ public class AccountCreator {
         registerPage.registerForm(name, email, password);
         registerPage.clickRegistration();
         Response response = new Requests().loginUser(new Login(email, password));
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         response.then().assertThat()
                 .statusCode(200);
         if (response.statusCode() == 200) {
