@@ -6,7 +6,6 @@ import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.*;
@@ -44,7 +43,7 @@ public class RegistrationProcessTest {
         registerPage.registerForm(Utils.randomString(10), Utils.randomString(5) + "@yandex.ru",
                 Utils.randomString(6));
         LoginPage loginPage = registerPage.clickRegistration();
-        $(By.xpath(".//div[@class='Auth_login__3hAey']/h2[text()='Вход']")).should(exist);
+        loginPage.displayInput();
     }
 
     @Test

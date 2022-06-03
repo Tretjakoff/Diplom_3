@@ -27,7 +27,7 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = ".//a[@class='Auth_link__1fOlj'][text()='Восстановить пароль']")
     private SelenideElement restorePasswordButton;
 
-    //локатор текста "Вход"
+    //локатор заголовка с текстом "Вход"
     @FindBy(how = How.XPATH, using = ".//div[@class='Auth_login__3hAey']/h2[text()='Вход']")
     private SelenideElement textInput;
 
@@ -62,7 +62,7 @@ public class LoginPage {
         return page(RegisterPage.class);
     }
 
-    //метод проверки того, что отобразилось слово "Вход"
+    //метод проверки того, что отобразился заголовок с текстом "Вход"
     public void displayInput() {
         textInput.should(exist);
     }
